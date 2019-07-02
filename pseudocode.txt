@@ -1,0 +1,8 @@
+-Configure APIs
+    -Google Maps API 
+    -Crime data APIs
+    -News APIs w/ location data
+-Get information from the search box and pass it to the APIs
+    -After this, update the DOM to display the relevent information for the search query
+    -Try to add markers from the news API and the crime data APIs onto the Google maps once configured
+-Clear the page upon a new search 
