@@ -6,3 +6,19 @@
     -After this, update the DOM to display the relevent information for the search query
     -Try to add markers from the news API and the crime data APIs onto the Google maps once configured
 -Clear the page upon a new search 
+
+-Upon entering information from the search:
+    -Create an element for the information, which will allow us to pass it to the APIs easily
+        -var searchID = <enter here>
+            -Pull from search box 
+    -Once the data is assigned to the variable:
+        -Pass data to the google maps api:
+            -This will show a surrounding area
+        -Pass data to the news API:
+            -Need locations for the news API.
+            -With locations enabled on the news API, then create a blimp on the Google map 
+                -Once the blimp is made:
+                    -Link to the story if clicked on
+        -Pass data to the crime stats API:
+            -Perhaps present the crime stats as a graph
+            -Major crime incidents reported on map.
