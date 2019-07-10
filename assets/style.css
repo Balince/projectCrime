@@ -1,31 +1,85 @@
+/* body{
+    background-image: url("https://channel45news.com/wp-content/uploads/2017/06/2lsbfbk.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: auto;
+    object-fit:cover;
+    background-attachment: fixed;
+    
+} */
+
+
 h1{
     font-family: "Barriecito";
     text-align: center;
+    color: whitesmoke;
 }
-body{ 
-    background-image: url("http://2.bp.blogspot.com/-Y-s6X6EIrc0/U-lD2d8lOqI/AAAAAAAAN2A/voWsFQi1CLg/s1600/0806-pissedoffguy-faq.jpg"); 
-    background-image: url("https://channel45news.com/wp-content/uploads/2017/06/2lsbfbk.jpg");
-    background-color: #cccccc;
-    background-size:auto ;
-    background-repeat: no-repeat;
-    margin-left: 25%; 
-   
-   
-    
-  
- }
 
-img{ 
-     display:inline-block;
-     text-align: center;
-     margin-left: 17%;
-     position:relative;
+.header{
+    width: 250px;
+    height: 250px;
+    margin: auto;
+    object-fit:cover;
+    display: inline-block;
+    text-align: center;
+    opacity:1;
+
+    
+}
+h3{
+    text-align: center;
+    font-family: "Rubik Mono One";
+    margin-top: 15px;
+    margin-bottom: 20px;
+    margin-left: 150px;
+    display: inline-block;
+    padding-bottom: 8px;
+    padding-top: 6px;
+    background-color: yellow;
+
+
+}
+#lurk{
+    display: inline-block;
+}
+.jumbotron{
+    margin: auto;
+    background-image: url("https://as2.ftcdn.net/jpg/00/62/02/13/1000_F_62021304_L3UarRi5RZmCjqdL7ripQBdOcWihdhqp.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-bottom: 0px;
+    padding-top: 16px;
+
+}
+
+#picBox{
+    text-align: center;
+}
+h2{
+    text-align: center;
+
+}
+#mapTile{
+    width:570px;
+    height:570px;
+    object-fit:cover;
+
+}
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
      
-     
-     
- 
- #scaryMan{
- background-color: #cccccc;
- background-size: cover;
- background-image: url("https://channel45news.com/wp-content/uploads/2017/06/2lsbfbk.jpg");
- }
+

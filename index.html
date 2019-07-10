@@ -2,43 +2,126 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap,CSS,google fonts -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Barriecito&display=swap" rel="stylesheet">
+  <!-- Bootstrap,CSS,google fonts -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Rubik+Mono+One|Barriecito&display=swap" rel="stylesheet">
 
-    <title>Project Crime</title>
+  <title>Project Crime</title>
 </head>
 
 <body>
-    <div class="container-fluid">
-        <h1 class="jumbotron bg-dark text-danger">Project anti-Mayhem<br>
-            Protecting you from scary people like this guy...</h1>
+  <div class="container-fluid" id="jcont">
+    <!-- <div class="row"> -->
+    <div class="jumbotron">
+
+      <h1>Welcome to Project (anti)Mayhem</h1>
+      <div class="container-fluid" id="picBox">
+        <img class="header" src="https://channel45news.com/wp-content/uploads/2017/06/2lsbfbk.jpg">
+        <img class="header" src="https://images-na.ssl-images-amazon.com/images/I/51jPKxEq7aL.jpg">
+        <img class="header" src="https://murderpedia.org/male.T/images/timmendequas_jesse/timmendeq000.jpg">
+        <img class="header"
+          src="https://cdn.cnn.com/cnnnext/dam/assets/150325083957-dnt-adam-lanza-house-demolished-00001709-exlarge-169.jpg">
+      </div>
+      <h3>Informing you of the creepers in your area!</h3>
     </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div id="map">
+          <h2>Random Crime Facts</h2>
+          <ul>
+            <li>One in three children will be diddled by their uncle in a game closet in alabama. </li>
+            <li>1 of 8 people have commited sexual assault (look around you)</li>
+            <li>1 in 60 people is currently on parole for a violent offense (look around you)</li>
+            <li>these facts were completely unfabricated by the author </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-6">
+        <h2>Map will be here</h2>
+        <image id="mapTile" src="https://developers.planet.com/tutorials/images/quad.png"></image>
 
-    <div class="container-fluid" id="scaryMan">
-        <!-- <img src ="https://channel45news.com/wp-content/uploads/2017/06/2lsbfbk.jpg"> -->
+      </div>
+      <!-- <div class="col"> -->
+          <div class="col-xs-8 col-xs-offset-2">
+              <div class="input-group">
+                      <div class="input-group-btn search-panel">
+                          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <span id="search_concept">Filter by</span> <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu" role="menu">
+                            <li><a href="#contains">Contains</a></li>
+                            <li><a href="#its_equal">It's equal</a></li>
+                            <li><a href="#greather_than">Greather than ></a></li>
+                            <li><a href="#less_than">Less than </a></li>
+                            <li class="divider"></li>
+                            <li><a href="#all">Anything</a></li>
+                          </ul>
+                      </div>
+                      <input type="hidden" name="search_param" value="all" id="search_param">         
+                      <input type="text" class="form-control" name="x" placeholder="Search term...">
+                      <span class="input-group-btn">
+                          <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                      </span>
+                  </div>
+              <!-- </div> -->
+        <!-- <h2>search bar will be here></h2> -->
+        <!-- <form class="form-inline ">
+          <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search">
+          <i class="fas fa-search" aria-hidden="true"></i>
+        </form> -->
+      </div>
     </div>
+    <div class="row">
+      <div class="col-12">
+        <h2>results will be here</h2>
+        <p>
+          Lorem get down get down dolizzle sit tellivizzle, consectetizzle adipiscing brizzle. Nullam fizzle velizzle,
+          ma nizzle volutpizzle, mah nizzle tellivizzle, cool fo shizzle mah nizzle fo rizzle, mah home g-dizzle, mah
+          nizzle. Pellentesque owned tortizzle. Sizzle erizzle. Mammasay mammasa mamma oo sa izzle dolor dapibus turpis
+          uhuh ... yih! shut the shizzle up. Maurizzle pellentesque nibh et turpizzle. Stuff in pizzle. Pellentesque
+          dang rhoncizzle shizzlin dizzle. In hizzle my shizz platea dictumst. Fizzle dapibizzle. Curabitizzle mofo for
+          sure, pretizzle black, mattizzle ass, dawg vitae, nunc. Crunk suscipizzle. Integer yo fo shizzle sizzle
+          pizzle.
+        </p>
+      </div>
+    </div>
+  </div>
 
 
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS, then linked js -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-    <script src="assets/crime.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS, then linked js -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script src="assets/crime.js"></script>
 </body>
 
 </html>
