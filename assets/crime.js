@@ -213,7 +213,10 @@ $.ajax({
             console.log(response.features[0].center[0]);
             console.log(response.features[0].center[1]);
             map.on('load', function(){
-                map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
+                map.loadImage('https://banner2.kisspng.com/20171218/8e1/target-png-5a375d6ac2f738.0061728415135778347986.jpg', function(error, image){
+                    if(error) throw error;
+                    map.addImage('target', image);
+                })
              
                 map.addLayer({
                 "id": "points"+i,
@@ -232,7 +235,7 @@ $.ajax({
             }
             },
             "layout": {
-            "icon-image": "pulsing-dot"
+            "icon-image": "target"
             }
             });
             })
