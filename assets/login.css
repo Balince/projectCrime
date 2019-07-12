@@ -1,8 +1,8 @@
-.buttonColor {
-    background-color: darkgray;
+/* .buttonColor {
+    background-color:  rgb(88, 88, 88);
     border: none;
     box-shadow: none;
-    color: black;
+    color: whitesmoke;
     border-radius: 25px;
     margin-right: 2px;
     outline: 0;
@@ -15,12 +15,179 @@
 }
 
 .navCSS {
-    background-color: darkgray;
+    background-color: rgb(88, 88, 88);
     margin-right: 2px;
     outline: 0;
 }
 
 .textFields {
+    background-color:  black;
+    color: whitesmoke;
+    box-shadow: none;
+    margin-right: 2px;
+    border: none;
+    padding: 0px;
+    outline: 0;
+} */
+
+h1{
+    font-family: "Barriecito";
+    text-align: center;
+    color: whitesmoke;
+ }
+ 
+ .header{
+    width: 250px;
+    height: 250px;
+    margin: 10px;
+    object-fit:cover;
+    display: inline-block;
+    text-align: center;
+    opacity:1;
+    border-radius: 50%;
+ 
+ 
+ }
+ #creeper{
+    text-align: center;
+    font-family: "Creepster";
+    margin:auto;
+    background:rgba(0, 0, 0, 0.7);
+    margin-left: 28%;
+    display: inline-block;
+    padding-bottom: 8px;
+    padding-top: 6px;
+    color: whitesmoke;
+    letter-spacing: 3px;
+ 
+ 
+ 
+ 
+ }
+ #lurk{
+    display: inline-block;
+ }
+ .jumbotron{
+    margin: auto;
+    background-image: url("https://as2.ftcdn.net/jpg/00/62/02/13/1000_F_62021304_L3UarRi5RZmCjqdL7ripQBdOcWihdhqp.jpg
+ https://as2.ftcdn.net/jpg/00/62/02/13/1000_F_62021304_L3UarRi5RZmCjqdL7ripQBdOcWihdhqp.jpg
+ ");
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-bottom: 0px;
+    padding-top: 16px;
+ 
+ 
+ }
+ 
+ #picBox{
+    text-align: center;
+ }
+ h2{
+    text-align: center;
+ 
+ }
+ #mapTile{
+    width:570px;
+    height:570px;
+    object-fit:cover;
+ 
+ }
+ #mainDiv{
+    background: rgb(166, 166, 166,0.5);
+ 
+ 
+ 
+ }
+ .facts{
+    font-family:"Viga";
+ }
+ footer{
+    text-align: center;
+    background-color: black;
+    color: whitesmoke;
+    font-family: "Monoton";
+    letter-spacing: 4.5px;
+    position: fixed;
+    margin-top: 100px;
+    bottom: 0;
+    width: 100%;
+    clear: both;
+ 
+ 
+      }
+ 
+ 
+ #crimeMap{
+    font-family:"Barriecito";
+ }
+ #facts{
+    font-family:"Viga";
+ }
+ #factHead{
+    font-weight: bold;
+    font-family: "Creepster";
+    text-decoration: underline;
+    text-align: center;
+    margin: auto;
+    margin-left: 25px;
+ 
+ }
+ #know{
+    font-family:"Barriecito"
+ }
+ 
+ 
+ 
+ 
+ /* sleek nav bar code starts */
+ /* General sizing */
+ ul.dropdown-lr {
+  width: 300px;
+ }
+ 
+ 
+ /* mobile fix  */
+ @media (max-width: 768px) {
+     .dropdown-lr h3 {
+         color: #eee;
+     }
+     .dropdown-lr label {
+         color: #eee;
+     }
+ }
+ 
+ /* sleek nav bar code ends */
+ 
+ 
+ 
+ 
+ 
+    /* mikes css begins */
+ 
+ /* .buttonColor {
+    background-color: darkgray;
+    border: none;
+    box-shadow: none;
+    color: black;
+    border-radius: 25px;
+    margin-right: 2px;
+    outline: 0;
+ 
+ }
+ 
+ .spacing {
+    margin-right: 10px;
+    outline: 0;
+ }
+ 
+ .navCSS {
+    background-color: darkgray;
+    margin-right: 2px;
+    outline: 0;
+ }
+ 
+ .textFields {
     background-color: darkgray;
     color: black;
     box-shadow: none;
@@ -29,6 +196,23 @@
     border-color: darkgray;
     padding: 0px;
     outline: 0;
-}
-
-
+ }
+ #mapCont{
+    margin-bottom: 100px;
+    background: rgb(166, 166, 166,0.5);
+ }
+ #searchCol{
+    text-align:center;
+ }
+ #map{
+    border-radius: 3%;
+ }
+ #searchBut:active{
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+    background-color: #668;
+ 
+ }
+ #searchBut:hover{
+    background-color:#669;
+ } */

@@ -10,63 +10,42 @@ firebase.initializeApp(config);
 var db = firebase.database();
 var dbUserName
 var dbUserPW
+var dbEmail
 var localDB = []
-var getObject;
-
-$("#searchB").hide();
 
 $(document).ready(function () {
 
-    // if you already login, skip the login screen and proceed straight to the search bar
-    var storeName = localStorage.getItem("storeName");
-    if (localStorage.getItem("storeName") && localStorage.getItem("storePW")) {
-        console.log("check")
-        $("storeName").text($("#spUname"))
-        $("storePW").text($("#spPass"))
-        $("#loginForm").click()
-        $("#hideBar").hide()
-        $('#user').text(storeName.replace(/"/g, ''))
-        $("#searchB").show();
+    // var storeName = localStorage.getItem("storeName");
+    // var storePW = localStorage.getItem("storePW");
+    
+    // // if you already logged in, hide the login and register dropdown and put the users name there
 
-    };
+    //     if (storeName && storePW) {
+    //     $(".username").text(storeName)
+    //     $(".password").text(storePW)
+    //     $(".dropdown-toggle").hide(); 
+    //     $(".login-submit").click();
+    //     $('.userDisplay').text(storeName.replace(/"/g, ''))
+    
 
-
-    // hide register new account text on register button click and login dropdown
-
-    $(".hide2").click(function () {
-        $(".hideText").hide()
-        $(".hideLog").hide()
-        $(".hideReg").show()
-    });
-
-    // show login dropdown and hide register dropdown
-    $(".hide1").click(function () {
-        $(".hideLog").show()
-        $(".hideReg").hide()
-    });
-
-    // // show register dropdown    
-    // $(".hide2").click(function() {
-    //     $(".hideReg").show()
-    // });   
+    // };
 
     // account creation
-    $("#addUser").on("click", function (e) {
+    $(".register-submit").on("click", function (e) {
         e.preventDefault();
-
-        var userName = $("#name").val().trim();
-        var userPW = $("#pw").val().trim();
+        console.log("checking")
+        var userName = $(".username").val().trim();
+        var userPW = $(".password").val().trim();
+        var userEmail = $(".email").val().trim();
 
         var newUser = {
             name: userName,
-            password: userPW
+            password: userPW,
+            email: userEmail 
 
         };
 
         db.ref().push(newUser);
-
-        $(".hideReg").hide();
-        $(".hideLog").show();
 
 
     });
@@ -77,41 +56,36 @@ $(document).ready(function () {
 
         dbUserName = newUserSnapshot.val().name;
         dbUserPW = newUserSnapshot.val().password;
+        dbEmail = newUserSnapshot.val().email;
         localDB.push(newUserSnapshot.val());
 
     });
 
 
-    $("#loginForm").on("submit", function (e) {
+    $(".login-submit").on("submit", function (e) {
         e.preventDefault();
         for (var i = 0; i < localDB.length; i++) {
             var userInfo = localDB[i]
             console.log(dbUserName)
 
-            //storing login info on users local storage for auto login
-            if (userInfo.name === $("#spUname").val() && userInfo.password === $("#spPass").val()) {
-                localStorage.setItem("storeName", JSON.stringify(userInfo.name));
-                localStorage.setItem("storePW", JSON.stringify(userInfo.password));
-                console.log('found', userInfo)
+            localStorage.setItem("storeName", JSON.stringify(userInfo.name));
+            localStorage.setItem("storePW", JSON.stringify(userInfo.password));
 
-                //hiding login screen and showing search screen
-                $("#loginForm")[0].reset();
-                $("#hideBar").hide();
-                $("#user").text(userInfo.name);
-                $("#searchB").show();
+            //storing login info on users local storage for auto login
+            if (userInfo.name === $(".username").val() && userInfo.password === $(".password").val()) {
+               
+                console.log("check")
+                $(".username").text(userInfo.name)
+                $(".password").text(userInfo.password)
+               
+
+                
+
+
 
             }
 
+
         }
-    });
-
-    // basic search functionality along with resetting all search info on submit click
-    $("#searchForm").on("submit", function (e) {
-        e.preventDefault();
-
-        $("#searchForm")[0].reset();
-        $("#hideBar").hide();
-        $("#searchB").show();
-
     });
 });

@@ -1,86 +1,258 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="login.css">
-    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
-
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap 4 for original layout -->
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+  <!-- google fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Rubik+Mono+One|Barriecito|Viga|Creepster|Monoton&display=swap"
+    rel="stylesheet">
+  <!-- bootstrap 3 from site -->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+  <!-- css tags -->
+  <!-- animate for nav bar -->
+  <link href="https://cdn.phpoll.com/css/animate.css" rel="stylesheet">
+  <!-- my custom stylesheet -->
+  <link rel="stylesheet" href="assets/style.css">
+  <!-- firebase -->
+  <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+  <title>Project Crime</title>
 </head>
-
 <body>
-    <nav class="navbar navbar-expand-lg navCSS" id="hideBar">
-
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-
-
-            <button class="btn btn-outline-dark hide1 buttonColor" type="button" data-toggle="collapse"
-                data-target="#dropdown-menu">Login</button>
-            <div id="dropdown-menu" class="collapse hideLog">
-                <form class="form-inline" id='loginForm' accept-charset="UTF-8">
-                    <input id="spUname" class="form-inline login textFields" type="text" name="sp_uname" maxlength="10"
-                        placeholder="" />
-                    <input id="spPass" class="form-inline login textFields" type="password" name="sp_pass"
-                        maxlength="10" placeholder="" />
-                    <input class="btn btn-outline-dark buttonColor" id="userLogin" type="submit" name="log"
-                        value="Submit" />
-                </form>
+  <!-- nav bar begins -->
+  <nav id="navbar" class="navbar navbar-inverse navbar-fixed-top collapse navbar-collapse" role="navigation">
+    <a class="navbar-brand"> Project (anti)Mayhem</a>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="http://phpoll.com/register" class="dropdown-toggle" data-toggle="dropdown">Register <span
+            class="caret"></span></a>
+        <ul class="dropdown-menu dropdown-lr animated flipInX" role="menu">
+          <div class="col-lg-12">
+            <div class="text-center">
+              <h3><b>Register</b></h3>
             </div>
-            <button class="btn btn-outline-dark hide2 buttonColor" type="button" data-toggle="collapse"
-                data-target="#dropdown-reg">Register</button>
-            <h8 class=hideText style="color: red">If you don't have an account please register first!</h8>
-            <div id="dropdown-reg" class="collapse hideReg">
-                <form class="form-inline" accept-charset="UTF-8">
-                    <input id="name" class="form-control regis" type="text" name="name" maxlength="10" placeholder="" />
-                    <input id="pw" class="form-control regis" type="text" name="pw" maxlength="10" placeholder="" />
-                    <input class="btn btn-outline-dark buttonColor" id="addUser" type="submit" name="reg"
-                        value="Submit" />
-                </form>
+            <form id="ajax-register-form"  method="post" role="form"
+              autocomplete="off">
+              <div class="form-group">
+                <input type="text" name="username" id="username" tabindex="1" class="form-control"
+                  placeholder="Username" value="">
+              </div>
+              <div class="form-group">
+                <input type="email" name="email" id="email" tabindex="1" class="form-control"
+                  placeholder="Email Address" value="">
+              </div>
+              <div class="form-group">
+                <input type="password" name="password" id="password" tabindex="2" class="form-control"
+                  placeholder="Password">
+              </div>
+              <div class="form-group">
+                <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control"
+                  placeholder="Confirm Password">
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-xs-6 col-xs-offset-3">
+                    <input type="submit" name="register-submit" id="register-submit" tabindex="4"
+                      class="form-control btn btn-info" value="Register Now">
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="http://phpoll.com/login" class="dropdown-toggle" data-toggle="dropdown">Log In <span
+            class="caret"></span></a>
+        <ul class="dropdown-menu dropdown-lr animated slideInRight" role="menu">
+          <div class="col-lg-12">
+            <div class="text-center">
+              <h3><b>Log In</b></h3>
             </div>
-        </div>
-
-    </nav>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="searchB">
-        <h2 id="user" class="spacing"></h2>
-        <form class="form-inline" id="searchForm">
-            <div class="form-group spacing">
-                <label class="spacing" for="area">City or Zip</label>
-                <input type="text" class="form-control spacing" id="area">
-            </div>
-            <div id="checkbox">
-                <label class="spacing"><input type="checkbox" id="masterbater" />Public masterbater</label>
-            </div>
-            <div id="checkbox">
-                <label class="spacing"><input type="checkbox" id="publicD" />Public defacation</label>
-            </div>
-
-
-            <button type="submit" class="btn btn-default" id="sSubmit">Submit</button>
-
+            <form id="ajax-login-form" method="post" role="form"
+              autocomplete="off">
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" tabindex="1" class="form-control"
+                  placeholder="Username" value="" autocomplete="off">
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" tabindex="2" class="form-control"
+                  placeholder="Password" autocomplete="off">
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-xs-7">
+                    <input type="checkbox" tabindex="3" name="remember" id="remember">
+                    <label for="remember"> Remember Me</label>
+                  </div>
+                  <div class="col-xs-5 pull-right">
+                    <input type="submit" name="login-submit" id="login-submit" tabindex="4"
+                      class="form-control btn btn-success" value="Log In">
+                  </div>
+                </div>
+              </div>
+              
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <input type="hidden" class="hide" name="token" id="token" value="a465a2791ae0bae853cf4bf485dbe1b6">
+            </form>
+          </div>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+  <!-- nav bar ends -->
+  <!-- mikes nav code begins -->
+  <!-- <nav class="navbar navbar-expand-lg navCSS" id="hideBar">
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <button class="btn btn-outline-dark hide1 buttonColor" type="button" data-toggle="collapse"
+        data-target="#dropdown-menu">Login</button>
+      <div id="dropdown-menu" class="collapse hideLog">
+        <form class="form-inline" id='loginForm' accept-charset="UTF-8">
+          <input id="spUname" class="form-inline login textFields" type="text" name="sp_uname" maxlength="10"
+            placeholder="" />
+          <input id="spPass" class="form-inline login textFields" type="password" name="sp_pass" maxlength="10"
+            placeholder="" />
+          <input class="btn btn-outline-dark buttonColor" id="userLogin" type="submit" name="log" value="Submit" />
         </form>
+      </div>
+      <button class="btn btn-outline-dark hide2 buttonColor" type="button" data-toggle="collapse"
+        data-target="#dropdown-reg">Register</button>
+      <h8 class=hideText style="color: red">If you don't have an account please register first!</h8>
+      <div id="dropdown-reg" class="collapse hideReg">
+        <form class="form-inline" accept-charset="UTF-8">
+          <input id="name" class="form-control regis" type="text" name="name" maxlength="10" placeholder="" />
+          <input id="pw" class="form-control regis" type="text" name="pw" maxlength="10" placeholder="" />
+          <input class="btn btn-outline-dark buttonColor" id="addUser" type="submit" name="reg" value="Submit" />
+        </form>
+      </div>
+    </div>
+  </nav> 
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="searchB">
+    <h2 id="user" class="spacing"></h2>
+    <form class="form-inline" id="searchForm">
+      <div class="form-group spacing">
+        <label class="spacing" for="area">City or Zip</label>
+        <input type="text" class="form-control spacing" id="area">
+      </div>
+      <div id="checkbox">
+        <label class="spacing"><input type="checkbox" id="masterbater" />Public masterbater</label>
+      </div>
+      <div id="checkbox">
+        <label class="spacing"><input type="checkbox" id="publicD" />Public defacation</label>
+      </div>
+      <button type="submit" class="btn btn-default" id="sSubmit">Submit</button>
+    </form>
+    </div>
+  </nav> -->
+  <!-- mikes nav code ends -->
+  <!-- header begins -->
+  <div class="container-fluid" id="jcont">
+    <div class="jumbotron">
+      <h1>Welcome to Project (anti)Mayhem</h1>
+      <div class="container-fluid" id="picBox">
+        <img class="header" src="https://channel45news.com/wp-content/uploads/2017/06/2lsbfbk.jpg">
+        <img class="header" src="https://images-na.ssl-images-amazon.com/images/I/51jPKxEq7aL.jpg">
+        <img class="header" src="https://murderpedia.org/male.T/images/timmendequas_jesse/timmendeq000.jpg">
+        <img class="header" src="assets/images/r-kelly-mugshot.jpg">
+      </div>
+      <h3 id="creeper">Informing you of the creepers in your area!</h3>
+    </div>
+  </div>
+  <!-- header ends -->
+  <!-- first content box begins -->
+  <div class="container-fluid" id="mainDiv">
+    <!-- page instructions begin -->
+    <div class="row">
+      <div class="col-12">
+        <div class="text-box">
+          <p>
+            Lorem get down get down dolizzle sit tellivizzle, consectetizzle adipiscing brizzle. Nullam fizzle velizzle,
+            ma nizzle volutpizzle, mah nizzle tellivizzle, cool fo shizzle mah nizzle fo rizzle, mah home g-dizzle, mah
+            nizzle. Pellentesque owned tortizzle. Sizzle erizzle. Mammasay mammasa mamma oo sa izzle dolor dapibus
+            turpis
+            uhuh ... yih! shut the shizzle up. Maurizzle pellentesque nibh et turpizzle. Stuff in pizzle. Pellentesque
+            dang rhoncizzle shizzlin dizzle. In hizzle my shizz platea dictumst. Fizzle dapibizzle. Curabitizzle mofo
+            for
+            sure, pretizzle black, mattizzle ass, dawg vitae, nunc. Crunk suscipizzle. Integer yo fo shizzle sizzle
+            pizzle.
+          </p>
         </div>
-    </nav>
+      </div>
+    </div>
+    <!-- instruction box ends -->
+    <!-- search box begins -->
+    <div class="row">
+      <div class="col-md-12" id="searchCol">
+        <!-- Text input to test searching -->
+        <input id="input" placeholder="creeper search" type="text">
+        <button id="searchBut" class="active hover" id="submit">Submit</button>
+      </div>
+    </div>
+    <!-- search box ends -->
+  </div>
+  <!--first content box ends  -->
+  <!-- second content box begins -->
+  <div class="container-fluid" id="mapCont">
+    <!-- map box begins -->
+    <div class="row">
+      <div class="col-md-12">
+        <h2 id="crimeMap">Crime Map</h2>
+        <div id='geocoder' class='geocoder'></div>
+        <!-- <div id="pageContainer"> -->
+        <!-- Map -->
+        <div id='map' style='width: 1480x; height: 500px;'></div>
+        <!--  map box java code starts -->
+        <script src='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js'></script>
+        <link href='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css' rel='stylesheet' />
+      </div>
+    </div>
+    <!-- map box ends -->
+    <!-- fact box begins -->
+    <div id="facts">
+      <h2 id="know">Knowledge is Power</h2>
+      <span id="factHead">Random Crime Facts to Make you Uneasy</span>
+      <ul>
+        <li class="facts" id="firstFact"></li>
+        <li class="facts" id="secondFact"></li>
+        <li class="facts" id="thirdFact"></li>
+        <li class="facts" id="fourthFact"></li>
+      </ul>
+    </div>
+    <!-- fact box ends -->
+  </div>
+  <!-- second content box ends -->
+  <!-- footer begins -->
+  <footer class="clearfix">
+    <p>The facts in this presentation may not be reflective of reality.
+      &copy; 2019 Project (anti)Mayhem, USA.
+      Built with a sick sense of humor.
+      All rights reserved.</p>
+  </footer>
+  <!-- footer ends -->
 
-
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-    </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-    </script>
-    <script src="login.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+</script>
+<script src="login.js"></script>
 </body>
-
 </html>
