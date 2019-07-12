@@ -1,4 +1,4 @@
-//When the page loads start
+//When the page loads start //change to document.ready
 window.onload = function(){
 
     //Vars for the location:
@@ -70,6 +70,80 @@ map.addControl(geocoder);
 
 var locationArea;
 
+var size = 100;
+
+var pulsingDot = {
+    width: size,
+    height: size,
+    data: new Uint8Array(size * size * 4),
+
+    onAdd: function(){
+        var canvas = document.createElement('canvas');
+        canvas.width = this.width;
+        canvas.height = this.height;
+        this.context = canvas.getContext('2d');
+    },
+
+    render: function() {
+        var duration = 1000;
+        var t = (performance.now() % duration) / duration;
+         
+        var radius = size / 2 * 0.3;
+        var outerRadius = size / 2 * 0.7 * t + radius;
+        var context = this.context;
+         
+        // draw outer circle
+        context.clearRect(0, 0, this.width, this.height);
+        context.beginPath();
+        context.arc(this.width / 2, this.height / 2, outerRadius, 0, Math.PI * 2);
+        context.fillStyle = 'rgba(255, 200, 200,' + (1 - t) + ')';
+        context.fill();
+         
+        // draw inner circle
+        context.beginPath();
+        context.arc(this.width / 2, this.height / 2, radius, 0, Math.PI * 2);
+        context.fillStyle = 'rgba(255, 100, 100, 1)';
+        context.strokeStyle = 'white';
+        context.lineWidth = 2 + 4 * (1 - t);
+        context.fill();
+        context.stroke();
+         
+        // update this image's data with data from the canvas
+        this.data = context.getImageData(0, 0, this.width, this.height).data;
+         
+        // keep the map repainting
+        map.triggerRepaint();
+         
+        // return `true` to let the map know that the image was updated
+        return true;
+        }
+};
+
+map.on('load', function(){
+    map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
+ 
+    map.addLayer({
+    "id": "points",
+    "type": "symbol",
+    "source": {
+    "type": "geojson",
+    "data": {
+    "type": "FeatureCollection",
+    "features": [{
+    "type": "Feature",
+    "geometry": {
+    "type": "Point",
+    "coordinates": [-75.208, 39.965]
+}
+}]
+}
+},
+"layout": {
+"icon-image": "pulsing-dot"
+}
+});
+})
+
 var newsAPI = "d3ebf4a3106647c0ae1bafd8127c1e37";
 
 geocoder.on('result', function(e){                      //When the search is performed
@@ -109,6 +183,84 @@ $.ajax({
     console.log("murder");
     console.log(response);
 });
+
+var crimeYear = 2018;
+
+var locationArray = [];
+var coordArray = [];
+
+//testing carto api
+$.ajax({
+    url: "https://phl.carto.com/api/v2/sql?q=SELECT * FROM shootings WHERE year ="+ crimeYear,
+    method: "GET"
+}).then(function(response){
+    console.log("carto");
+    console.log(response);
+    for(let i = 0; i < response.rows.length; i++){
+        locationArray[i] = response.rows[i].location;
+        // console.log("ARR: "+ locationArray[i]);
+        convArrOne[i] = locationArray[i].replace(/ /g, "%25");
+        convArrOne[i] = locationArray[i].replace("BLOCK", "");
+        // console.log("-----------");
+        // console.log(convArrOne[i]);  
+
+        $.ajax({
+            url: "https://api.mapbox.com/geocoding/v5/mapbox.places/"+ convArrOne[i] +"%25PHILADELPHIA%25PA.json?country=US&region=Philadelphia&region=PA&access_token=pk.eyJ1IjoibmtleWVzIiwiYSI6ImNqeHJuaW54NDA2MXEzZm1yYnZ5dW85bGIifQ.5bp-rkNWdhNCEwHkYKt5aA",
+            method: "GET"
+        }).then(function(response){
+            console.log(response);
+            console.log("----COORDS----");
+            console.log(response.features[0].center[0]);
+            console.log(response.features[0].center[1]);
+            map.on('load', function(){
+                map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
+             
+                map.addLayer({
+                "id": "points"+i,
+                "type": "symbol",
+                "source": {
+                "type": "geojson",
+                "data": {
+                "type": "FeatureCollection",
+                "features": [{
+                "type": "Feature",
+                "geometry": {
+                "type": "Point",
+                "coordinates": [response.features[0].center[0], response.features[0].center[1]]
+            }
+            }]
+            }
+            },
+            "layout": {
+            "icon-image": "pulsing-dot"
+            }
+            });
+            })
+        })
+
+    }
+});
+
+//Forward Geocoding
+
+//https://api.mapbox.com/geocoding/v5/mapbox.places/123%20Main%20St%20Boston%20MA.json?country=US&access_token=pk.eyJ1IjoibmtleWVzIiwiYSI6ImNqeHJuaW54NDA2MXEzZm1yYnZ5dW85bGIifQ.5bp-rkNWdhNCEwHkYKt5aA
+
+//Need to convert addresses into data that can be passed to the maps
+
+var convArrOne = [];
+console.log("ONTOP-------------------------------------------------------------");
+for(let i = 0; i < locationArray.length; i++){
+    convArrOne[i] = locationArray[i].replace(/ /g, "%");
+    console.log(locationArray[i]);
+}
+
+$.ajax({
+    url: "https://api.mapbox.com/geocoding/v5/mapbox.places/123%20Main%20St%20Boston%20MA.json?country=US&access_token=pk.eyJ1IjoibmtleWVzIiwiYSI6ImNqeHJuaW54NDA2MXEzZm1yYnZ5dW85bGIifQ.5bp-rkNWdhNCEwHkYKt5aA",
+    method: "GET"
+}).then(function(response){
+    console.log("TEST -- TEST -- TEST");
+    console.log(response);
+})
 
 
 ///api/data/arrest/national/{offense}/{variable}/{since}/{until}
