@@ -35,7 +35,9 @@ window.onload = function(){
 mapboxgl.accessToken = 'pk.eyJ1IjoibmtleWVzIiwiYSI6ImNqeHJuaW54NDA2MXEzZm1yYnZ5dW85bGIifQ.5bp-rkNWdhNCEwHkYKt5aA';
 var map = new mapboxgl.Map({
 container: 'map',
-style: 'mapbox://styles/mapbox/streets-v11'
+style: 'mapbox://styles/mapbox/streets-v11',
+center: [-75.16383138706976,39.95164286836001],
+zoom: 10
 });
 
 map.setStyle('mapbox://styles/mapbox/dark-v9');
@@ -71,78 +73,6 @@ map.addControl(geocoder);
 var locationArea;
 
 var size = 100;
-
-var pulsingDot = {
-    width: size,
-    height: size,
-    data: new Uint8Array(size * size * 4),
-
-    onAdd: function(){
-        var canvas = document.createElement('canvas');
-        canvas.width = this.width;
-        canvas.height = this.height;
-        this.context = canvas.getContext('2d');
-    },
-
-    render: function() {
-        var duration = 1000;
-        var t = (performance.now() % duration) / duration;
-         
-        var radius = size / 2 * 0.3;
-        var outerRadius = size / 2 * 0.7 * t + radius;
-        var context = this.context;
-         
-        // draw outer circle
-        context.clearRect(0, 0, this.width, this.height);
-        context.beginPath();
-        context.arc(this.width / 2, this.height / 2, outerRadius, 0, Math.PI * 2);
-        context.fillStyle = 'rgba(255, 200, 200,' + (1 - t) + ')';
-        context.fill();
-         
-        // draw inner circle
-        context.beginPath();
-        context.arc(this.width / 2, this.height / 2, radius, 0, Math.PI * 2);
-        context.fillStyle = 'rgba(255, 100, 100, 1)';
-        context.strokeStyle = 'white';
-        context.lineWidth = 2 + 4 * (1 - t);
-        context.fill();
-        context.stroke();
-         
-        // update this image's data with data from the canvas
-        this.data = context.getImageData(0, 0, this.width, this.height).data;
-         
-        // keep the map repainting
-        map.triggerRepaint();
-         
-        // return `true` to let the map know that the image was updated
-        return true;
-        }
-};
-
-map.on('load', function(){
-    map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
- 
-    map.addLayer({
-    "id": "points",
-    "type": "symbol",
-    "source": {
-    "type": "geojson",
-    "data": {
-    "type": "FeatureCollection",
-    "features": [{
-    "type": "Feature",
-    "geometry": {
-    "type": "Point",
-    "coordinates": [-75.208, 39.965]
-}
-}]
-}
-},
-"layout": {
-"icon-image": "pulsing-dot"
-}
-});
-})
 
 var newsAPI = "d3ebf4a3106647c0ae1bafd8127c1e37";
 
@@ -189,6 +119,13 @@ var crimeYear = 2018;
 var locationArray = [];
 var coordArray = [];
 
+var dateArray = [];             //array to house information about the crime date
+var timeArray = [];             //array to house information about the time of the crime
+var fatalArray = [];            //array to house information about the fatality information
+var raceArray = [];             //array to house data regarding victim's race
+var sexArray = [];              //array to house data regarding victim's sex
+var woundArray = [];            //array about victim wound information
+
 //testing carto api
 $.ajax({
     url: "https://phl.carto.com/api/v2/sql?q=SELECT * FROM shootings WHERE year ="+ crimeYear,
@@ -201,6 +138,12 @@ $.ajax({
         // console.log("ARR: "+ locationArray[i]);
         convArrOne[i] = locationArray[i].replace(/ /g, "%25");
         convArrOne[i] = locationArray[i].replace("BLOCK", "");
+        dateArray[i] = response.rows[i].date_;
+        timeArray[i] = response.rows[i].time;
+        fatalArray[i] = response.rows[i].fatal;
+        woundArray[i] = response.rows[i].wound;
+        raceArray[i] = response.rows[i].race;
+        sexArray[i] = response.rows[i].sex;
         // console.log("-----------");
         // console.log(convArrOne[i]);  
 
@@ -212,37 +155,75 @@ $.ajax({
             console.log("----COORDS----");
             console.log(response.features[0].center[0]);
             console.log(response.features[0].center[1]);
+            
             map.on('load', function(){
-                map.loadImage('https://banner2.kisspng.com/20171218/8e1/target-png-5a375d6ac2f738.0061728415135778347986.jpg', function(error, image){
-                    if(error) throw error;
-                    map.addImage('target', image);
-                })
-             
+                //Add layer showing places
                 map.addLayer({
-                "id": "points"+i,
-                "type": "symbol",
-                "source": {
-                "type": "geojson",
-                "data": {
-                "type": "FeatureCollection",
-                "features": [{
-                "type": "Feature",
-                "geometry": {
-                "type": "Point",
-                "coordinates": [response.features[0].center[0], response.features[0].center[1]]
-            }
-            }]
-            }
-            },
-            "layout": {
-            "icon-image": "target"
-            }
-            });
+                    "id": "places"+i,                //Adding the +i to create individual unique places
+                    "type": "symbol",
+                    "source": {
+                        "type": "geojson",
+                        "data": {
+                            "type": "FeatureCollection",
+                            "features": [{
+                                "properties":{
+                                    "description": "Shooting. <br> Date: "+ dateArray[i] + "<br> Time: " +timeArray[i] + "<br> Fatalities: "+ fatalArray[i] + "<br> Victim race: "+ raceArray[i] + "<br> Victim sex: "+ sexArray[i] + "<br> Victim wound: "+ woundArray[i] + "<br> Location: "+ locationArray[i],
+                                    "icon": "star"
+                                },
+                                "geometry": {
+                                    "type": "Point",
+                                    "coordinates": [response.features[0].center[0], response.features[0].center[1]]
+                                }
+                            }]
+                        }
+                    },
+                    "layout":{
+                        "icon-image": "{icon}-15",
+                        "icon-allow-overlap": true
+                    }
+                })
             })
-        })
 
+        })
+        map.on('click', 'places'+i, function (e) {
+            var coordinates = e.features[0].geometry.coordinates.slice();
+            var description = e.features[0].properties.description;
+             
+            // Ensure that if the map is zoomed out such that multiple
+            // copies of the feature are visible, the popup appears
+            // over the copy being pointed to.
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+             
+            new mapboxgl.Popup()
+            .setLngLat(coordinates)
+            .setHTML(description)
+            .addTo(map);
+            });
+             
+            // Change the cursor to a pointer when the mouse is over the places layer.
+            map.on('mouseenter', 'places', function () {
+            map.getCanvas().style.cursor = 'pointer';
+            });
+             
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'places', function () {
+            map.getCanvas().style.cursor = '';
+            });
     }
 });
+
+//Carto api two
+$.ajax({
+    url: "https://phl.carto.com/api/v2/sql?q=SELECT * FROM incidents_part1_part2 WHERE text_general_code = 'Vandalism/Criminal Mischief'",
+    method: "GET"
+}).then(function(response){
+    console.log("CARTO 2 HIT");
+    console.log(response);
+})
+
+
 
 //Forward Geocoding
 
@@ -257,13 +238,13 @@ for(let i = 0; i < locationArray.length; i++){
     console.log(locationArray[i]);
 }
 
-$.ajax({
-    url: "https://api.mapbox.com/geocoding/v5/mapbox.places/123%20Main%20St%20Boston%20MA.json?country=US&access_token=pk.eyJ1IjoibmtleWVzIiwiYSI6ImNqeHJuaW54NDA2MXEzZm1yYnZ5dW85bGIifQ.5bp-rkNWdhNCEwHkYKt5aA",
-    method: "GET"
-}).then(function(response){
-    console.log("TEST -- TEST -- TEST");
-    console.log(response);
-})
+// $.ajax({
+//     url: "https://api.mapbox.com/geocoding/v5/mapbox.places/123%20Main%20St%20Boston%20MA.json?country=US&access_token=pk.eyJ1IjoibmtleWVzIiwiYSI6ImNqeHJuaW54NDA2MXEzZm1yYnZ5dW85bGIifQ.5bp-rkNWdhNCEwHkYKt5aA",
+//     method: "GET"
+// }).then(function(response){
+//     console.log("TEST -- TEST -- TEST");
+//     console.log(response);
+// })
 
 
 ///api/data/arrest/national/{offense}/{variable}/{since}/{until}
