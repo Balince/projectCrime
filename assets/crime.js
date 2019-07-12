@@ -37,7 +37,7 @@ var map = new mapboxgl.Map({
 container: 'map',
 style: 'mapbox://styles/mapbox/streets-v11',
 center: [-75.16383138706976,39.95164286836001],
-zoom: 10
+zoom:12
 });
 
 map.setStyle('mapbox://styles/mapbox/dark-v9');
@@ -114,7 +114,7 @@ $.ajax({
     console.log(response);
 });
 
-var crimeYear = 2018;
+
 
 var locationArray = [];
 var coordArray = [];
@@ -126,7 +126,10 @@ var raceArray = [];             //array to house data regarding victim's race
 var sexArray = [];              //array to house data regarding victim's sex
 var woundArray = [];            //array about victim wound information
 
+var crimeYear = 2018;
+
 //testing carto api
+
 $.ajax({
     url: "https://phl.carto.com/api/v2/sql?q=SELECT * FROM shootings WHERE year ="+ crimeYear,
     method: "GET"
@@ -134,6 +137,7 @@ $.ajax({
     console.log("carto");
     console.log(response);
     for(let i = 0; i < response.rows.length; i++){
+
         locationArray[i] = response.rows[i].location;
         // console.log("ARR: "+ locationArray[i]);
         convArrOne[i] = locationArray[i].replace(/ /g, "%25");
@@ -155,7 +159,6 @@ $.ajax({
             console.log("----COORDS----");
             console.log(response.features[0].center[0]);
             console.log(response.features[0].center[1]);
-            
             map.on('load', function(){
                 //Add layer showing places
                 map.addLayer({
@@ -236,6 +239,14 @@ console.log("ONTOP-------------------------------------------------------------"
 for(let i = 0; i < locationArray.length; i++){
     convArrOne[i] = locationArray[i].replace(/ /g, "%");
     console.log(locationArray[i]);
+};
+
+
+function filterBy(year){
+
+    var filters = ["==", 'year', year];
+    map.setFilters
+
 }
 
 // $.ajax({
