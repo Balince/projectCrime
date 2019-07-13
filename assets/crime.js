@@ -41,7 +41,6 @@ $(document).ready(function () {
         var userName = $(".username").val().trim();
         var userPW = $(".password").val().trim();
         var userEmail = $(".email").val().trim();
-
         var newUser = {
             name: userName,
             password: userPW,
@@ -251,7 +250,6 @@ $("#fifthFact").html(chosen);
     });
 
 
-
     var locationArray = [];
     var coordArray = [];
 
@@ -273,7 +271,6 @@ $("#fifthFact").html(chosen);
         console.log("carto");
         console.log(response);
         for (let i = 0; i < response.rows.length; i++) {
-
             locationArray[i] = response.rows[i].location;
             // console.log("ARR: "+ locationArray[i]);
             convArrOne[i] = locationArray[i].replace(/ /g, "%25");
