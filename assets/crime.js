@@ -1,37 +1,3 @@
-//When the page loads start //change to document.ready
-window.onload = function(){
-
-    //Vars for the location:
-    var state = "PA";                       //State (2 Letter format)
-    var city = "Philadelphia"               //City
-    var location = city+"+"+state;
-    console.log("Loc: "+ location);
-    
-    //Configure the first API (Crime data)
-    var crimeDataKey = "tKe8k0TE88uhuF5co5j1Msaj8K6IoDeZIVncWvQe";
-    //API Url for the Crime Data
-    var crimeURL = "https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key="+ crimeDataKey +"&location="+ location;
-    //Making a call to the API
-    $.ajax({
-        url: crimeURL,
-        method: "GET"
-    }).then(function(response){
-        console.log(response);
-    })
-
-    //Configure the second API (News)
-    var newsKey = "02f81640ecmsh9312dc7baf084a0p1f0cd9jsn1b62c84cf7e4";
-    //API URL for the news
-    var newsURL = "microsoft-azure-bing-news-search-v1.p.rapidapi.com";
-    //Making a call to the API
-    $.ajax({
-        url: newsKey,
-        method: "GET"
-    }).then(function(response){
-        console.log(response);
-    })
-}
-
 mapboxgl.accessToken = 'pk.eyJ1IjoibmtleWVzIiwiYSI6ImNqeHJuaW54NDA2MXEzZm1yYnZ5dW85bGIifQ.5bp-rkNWdhNCEwHkYKt5aA';
 var map = new mapboxgl.Map({
 container: 'map',
@@ -49,13 +15,6 @@ map.addControl(new mapboxgl.GeolocateControl({
     },
     trackUserLocation: true
     }));
-
-$("#submit").on("click", function(event){
-    event.preventDefault();
-    var location = $("#input").val().trim();
-    console.log(location);
-    alert("Btn clicked");
-});
 
 var mapboxSearch = "https://api.mapbox.com/geocoding/v5/"+endpoint+"/"+location+".json";
 var endpoint = "mapbox.places";
@@ -139,7 +98,6 @@ $.ajax({
     for(let i = 0; i < response.rows.length; i++){
 
         locationArray[i] = response.rows[i].location;
-        // console.log("ARR: "+ locationArray[i]);
         convArrOne[i] = locationArray[i].replace(/ /g, "%25");
         convArrOne[i] = locationArray[i].replace("BLOCK", "");
         dateArray[i] = response.rows[i].date_;
@@ -148,8 +106,6 @@ $.ajax({
         woundArray[i] = response.rows[i].wound;
         raceArray[i] = response.rows[i].race;
         sexArray[i] = response.rows[i].sex;
-        // console.log("-----------");
-        // console.log(convArrOne[i]);  
 
         $.ajax({
             url: "https://api.mapbox.com/geocoding/v5/mapbox.places/"+ convArrOne[i] +"%25PHILADELPHIA%25PA.json?country=US&region=Philadelphia&region=PA&access_token=pk.eyJ1IjoibmtleWVzIiwiYSI6ImNqeHJuaW54NDA2MXEzZm1yYnZ5dW85bGIifQ.5bp-rkNWdhNCEwHkYKt5aA",
@@ -217,21 +173,6 @@ $.ajax({
     }
 });
 
-//Carto api two
-$.ajax({
-    url: "https://phl.carto.com/api/v2/sql?q=SELECT * FROM incidents_part1_part2 WHERE text_general_code = 'Vandalism/Criminal Mischief'",
-    method: "GET"
-}).then(function(response){
-    console.log("CARTO 2 HIT");
-    console.log(response);
-})
-
-
-
-//Forward Geocoding
-
-//https://api.mapbox.com/geocoding/v5/mapbox.places/123%20Main%20St%20Boston%20MA.json?country=US&access_token=pk.eyJ1IjoibmtleWVzIiwiYSI6ImNqeHJuaW54NDA2MXEzZm1yYnZ5dW85bGIifQ.5bp-rkNWdhNCEwHkYKt5aA
-
 //Need to convert addresses into data that can be passed to the maps
 
 var convArrOne = [];
@@ -240,28 +181,3 @@ for(let i = 0; i < locationArray.length; i++){
     convArrOne[i] = locationArray[i].replace(/ /g, "%");
     console.log(locationArray[i]);
 };
-
-
-function filterBy(year){
-
-    var filters = ["==", 'year', year];
-    map.setFilters
-
-}
-
-// $.ajax({
-//     url: "https://api.mapbox.com/geocoding/v5/mapbox.places/123%20Main%20St%20Boston%20MA.json?country=US&access_token=pk.eyJ1IjoibmtleWVzIiwiYSI6ImNqeHJuaW54NDA2MXEzZm1yYnZ5dW85bGIifQ.5bp-rkNWdhNCEwHkYKt5aA",
-//     method: "GET"
-// }).then(function(response){
-//     console.log("TEST -- TEST -- TEST");
-//     console.log(response);
-// })
-
-
-///api/data/arrest/national/{offense}/{variable}/{since}/{until}
-
-///api/data/arrest/agencies/{ori}/{offense}/{variable}/{since}/{until}
-
-//news API key = d3ebf4a3106647c0ae1bafd8127c1e37
-
-//<input type="text" class="mapboxgl-ctrl-geocoder--input" placeholder="Search">
