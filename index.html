@@ -42,10 +42,10 @@
 
   <!-- nav bar begins -->
   <nav id="navbar" class="navbar navbar-inverse navbar-fixed-top collapse navbar-collapse" role="navigation">
-    <a class="navbar-brand"> Project (anti)Mayhem</a>
+    <a class="navbar-brand" id="project"> Project (anti)Mayhem</a>
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
-        <a href="http://phpoll.com/register" class="dropdown-toggle" data-toggle="dropdown">Register <span
+        <a href="http://phpoll.com/register" class="dropdown-toggle" id="register" data-toggle="dropdown">Register <span
             class="caret"></span></a>
         <ul class="dropdown-menu dropdown-lr animated flipInX" role="menu">
           <div class="col-lg-12">
@@ -73,7 +73,7 @@
                 <div class="row">
                   <div class="col-xs-6 col-xs-offset-3">
                     <input type="submit" name="register-submit" id="register-submit" tabindex="4"
-                      class="form-control btn btn-info" value="Register Now">
+                      class="form-control btn btn-danger" value="Register Now">
                   </div>
                 </div>
               </div>
@@ -82,7 +82,7 @@
         </ul>
       </li>
       <li class="dropdown">
-        <a href="http://phpoll.com/login" class="dropdown-toggle" data-toggle="dropdown">Log In <span
+        <a href="http://phpoll.com/login" class="dropdown-toggle" id="login" data-toggle="dropdown">Log In <span
             class="caret"></span></a>
         <ul class="dropdown-menu dropdown-lr animated slideInRight" role="menu">
           <div class="col-lg-12">
@@ -108,7 +108,7 @@
                   </div>
                   <div class="col-xs-5 pull-right">
                     <input type="submit" name="login-submit" id="login-submit" tabindex="4"
-                      class="form-control btn btn-success" value="Log In">
+                      class="form-control btn btn-danger" id="buttcolor" value="Log In">
                   </div>
                 </div>
               </div>
@@ -133,14 +133,16 @@
     <div class="jumbotron">
       <h1 id="welcome">Welcome to Project (anti)Mayhem</h1>
       <div class="container-fluid" id="picBox">
-        <img class="header" src="https://channel45news.com/wp-content/uploads/2017/06/2lsbfbk.jpg">
-        <img class="header" src="https://images-na.ssl-images-amazon.com/images/I/51jPKxEq7aL.jpg">
-        <img class="header" src="https://murderpedia.org/male.T/images/timmendequas_jesse/timmendeq000.jpg">
-        <img class="header" src="assets/images/r-kelly-mugshot.jpg">
-        <div class="overlay">
-          <div class="text">Even when you're not, they are always watching...</div>
-
-
+          <img class="header" src="assets/images/cosby.png">
+          <img class="header" src="assets/images/mj.jpg">
+          <img class="header" src="assets/images/donnyboy.jpg">
+          <img class="header" src="assets/images/r-kelly-mugshot.jpg">
+        <div class="overlay" id="everywhere">
+          <img class="headertwo" src="assets/images/scaryguy.jpg">
+          <img class="headertwo" src="assets/images/donvito.jpg">
+          <img class="headertwo" src="assets/images/creep.jpg">
+          <img class="headertwo" src="assets/images/swiss.jpg">
+          <p class="closer">Creepers are all over the place...<br>and closer than you think</p>
         </div>
         <h3 id="creeper">Informing you of the creepers in your area!</h3>
       </div>
@@ -157,33 +159,16 @@
       <div class="col-12">
         <div class="text-box">
           <h1 id="intro">Welcome to Project (anti)Mayhem</h1>
-          <p>
-            Lorem get down get down dolizzle sit tellivizzle, consectetizzle adipiscing brizzle. Nullam fizzle velizzle,
-            ma nizzle volutpizzle, mah nizzle tellivizzle, cool fo shizzle mah nizzle fo rizzle, mah home g-dizzle, mah
-            nizzle. Pellentesque owned tortizzle. Sizzle erizzle. Mammasay mammasa mamma oo sa izzle dolor dapibus
-            turpis
-            uhuh ... yih! shut the shizzle up. Maurizzle pellentesque nibh et turpizzle. Stuff in pizzle. Pellentesque
-            dang rhoncizzle shizzlin dizzle. In hizzle my shizz platea dictumst. Fizzle dapibizzle. Curabitizzle mofo
-            for
-            sure, pretizzle black, mattizzle ass, dawg vitae, nunc. Crunk suscipizzle. Integer yo fo shizzle sizzle
-            pizzle.
+          <div class="container" id="safety">
+            <p id="thanks">
+            
+            Thank you for looking out for your safety. The world is filled with amazing people for sure but this app is not about them. This app is about the creeps, cheats, low lifes, child beating and cheating daddys. The information on this site will probably make you feel a mixture terror and anger...but that is not our aim. Our goal is to be able to give you reliable crime data relevant to your area and help keep you safe from your local creepers.
+         
           </p>
         </div>
       </div>
     </div>
     <!-- instruction box ends -->
-
-    <!-- search box begins -->
-
-    <div class="row" id="searchRow">
-      <div class="col-md-12" id="searchCol">
-        <!-- Text input to test searching -->
-        <input id="input" placeholder="creeper search" type="text">
-        <button id="searchBut" class="active hover" id="submit">Submit</button>
-      </div>
-    </div>
-
-    <!-- search box ends -->
 
   </div>
   <!--first content box ends  -->
@@ -196,14 +181,19 @@
     <div class="row">
       <div class="col-md-12">
 
-        <h2 id="crimeMap">Crime Map</h2>
+        <h2 id="crimeMap">Creeper Map</h2>
         <div id='geocoder' class='geocoder'></div>
 
         <!-- <div id="pageContainer"> -->
         <!-- Map -->
+        <script
+          src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.0/mapbox-gl-geocoder.min.js'></script>
+        <link rel='stylesheet'
+          href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.0/mapbox-gl-geocoder.css'
+          type='text/css' />
         <div id='map' style='width: 1480x; height: 500px;'></div>
 
-        <!--  map box java code starts -->
+        <!--  map box javascript code starts -->
         <script src='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js'></script>
         <link href='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css' rel='stylesheet' />
       </div>
@@ -214,34 +204,40 @@
     <!-- fact box begins -->
     <div id="facts">
       <h2 id="know">Knowledge is Power</h2>
-      <span id="factHead">Random Crime Facts to Make you Uneasy</span>
-      <ul>
-        <li class="facts" id="firstFact"></li>
-        <li class="facts" id="secondFact"></li>
-        <li class="facts" id="thirdFact"></li>
-        <li class="facts" id="fourthFact"></li>
+      <p class="ignored">Ignorance is not bliss! Ignorance can get you murdered!
+        <br>Here are some startling facts to keep you on high alert.
+      </p>
+      <h2 id="factHead">Creepy Crime Facts </h2>
+    <div class="container" id="factcont">
+      
+     
+      <ul class="factslist">
+        <li class="factslist" id="firstFact"></li>
+        <li class="factslist" id="secondFact"></li>
+        <li class="factslist" id="thirdFact"></li>
+        <li class="factslist" id="fourthFact"></li>
+        <li class="factslist" id="fifthFact"></li>
+        
       </ul>
     </div>
-    <!-- fact box ends -->
+      
+    </div>
+      <!-- fact box ends -->
 
-  </div>
-  <!-- second content box ends -->
+    </div>
+    <!-- second content box ends -->
 
-  <!-- footer begins -->
+    <!-- footer begins -->
 
-  <div id="footer">
-    The facts in this presentation may not be reflective of reality.
-    &copy; 2019 Project (anti)Mayhem, USA.
-    Built with a sick sense of humor.
-    All rights reserved.
+    <div id="footer">
+      The facts in this presentation have been thoroughly researched and verified by Mike.
+      &copy; 2019 Project (anti)Mayhem, USA.
+      Built with a sick sense of humor.
+      All rights reserved.
 
-  </div>
+    </div>
 
-  <!-- footer ends -->
-
-
-
-
+    <!-- footer ends -->
 
 
 
@@ -253,36 +249,44 @@
 
 
 
-  <!-- jQuery first, then Popper.js, then Bootstrap JS, then linked js -->
-
-  <!-- jquery for sleek nav bar -->
-  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 
 
-  <!-- jquery for inital styling -->
-
-  <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> -->
 
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS, then linked js -->
 
-  <!-- bootstrap for sleek navbar -->
-
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <!-- jquery for sleek nav bar -->
+    <!-- <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script> -->
 
 
-  <!--bootstrap js for initial styling  -->
+    <!-- jquery for inital styling -->
 
-  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script> -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
-  <!-- linked js file -->
-  <script src="assets/crime.js"></script>
+    <!-- jquery for sleek nav bar -->
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"></script>
+
+
+
+    <!-- bootstrap js for sleek navbar -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+
+    <!--bootstrap js for initial styling  -->
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"></script>
+    <!-- bootstrap js for sleek navbar -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+    <!-- linked js file -->
+    <script src="assets/crime.js"></script>
 </body>
 
 </html>
