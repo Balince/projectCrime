@@ -6,95 +6,238 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- Bootstrap,CSS,google fonts -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- Bootstrap 4 for original layout -->
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+
+  <!-- google fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Rubik+Mono+One|Barriecito|Viga|Creepster|Monoton&display=swap"
+    rel="stylesheet">
+
+  <!-- bootstrap 3 from site -->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+  <!-- css tags -->
+
+  <!-- animate for nav bar -->
+  <link href="https://cdn.phpoll.com/css/animate.css" rel="stylesheet">
+
+  <!-- my custom stylesheet -->
   <link rel="stylesheet" href="assets/style.css">
-  <link href="https://fonts.googleapis.com/css?family=Rubik+Mono+One|Barriecito&display=swap" rel="stylesheet">
+
+  <!-- firebase -->
+  <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+
+
+
 
   <title>Project Crime</title>
 </head>
 
 <body>
-  <div class="container-fluid" id="jcont">
-    <!-- <div class="row"> -->
-    <div class="jumbotron">
 
-      <h1>Welcome to Project (anti)Mayhem</h1>
+  <!-- nav bar begins -->
+  <nav id="navbar" class="navbar navbar-inverse navbar-fixed-top collapse navbar-collapse" role="navigation">
+    <a class="navbar-brand"> Project (anti)Mayhem</a>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="http://phpoll.com/register" class="dropdown-toggle" data-toggle="dropdown">Register <span
+            class="caret"></span></a>
+        <ul class="dropdown-menu dropdown-lr animated flipInX" role="menu">
+          <div class="col-lg-12">
+            <div class="text-center">
+              <h3><b>Register</b></h3>
+            </div>
+            <form id="ajax-register-form" method="post" role="form" autocomplete="off">
+              <div class="form-group">
+                <input type="text" name="username" id="username" tabindex="1" class="form-control"
+                  placeholder="Username" value="">
+              </div>
+              <div class="form-group">
+                <input type="email" name="email" id="email" tabindex="1" class="form-control"
+                  placeholder="Email Address" value="">
+              </div>
+              <div class="form-group">
+                <input type="password" name="password" id="password" tabindex="2" class="form-control"
+                  placeholder="Password">
+              </div>
+              <div class="form-group">
+                <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control"
+                  placeholder="Confirm Password">
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-xs-6 col-xs-offset-3">
+                    <input type="submit" name="register-submit" id="register-submit" tabindex="4"
+                      class="form-control btn btn-info" value="Register Now">
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="http://phpoll.com/login" class="dropdown-toggle" data-toggle="dropdown">Log In <span
+            class="caret"></span></a>
+        <ul class="dropdown-menu dropdown-lr animated slideInRight" role="menu">
+          <div class="col-lg-12">
+            <div class="text-center">
+              <h3><b>Log In</b></h3>
+            </div>
+            <form id="ajax-login-form" method="post" role="form" autocomplete="off">
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" tabindex="1" class="form-control"
+                  placeholder="Username" value="" autocomplete="off">
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" tabindex="2" class="form-control"
+                  placeholder="Password" autocomplete="off">
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-xs-7">
+                    <input type="checkbox" tabindex="3" name="remember" id="remember">
+                    <label for="remember"> Remember Me</label>
+                  </div>
+                  <div class="col-xs-5 pull-right">
+                    <input type="submit" name="login-submit" id="login-submit" tabindex="4"
+                      class="form-control btn btn-success" value="Log In">
+                  </div>
+                </div>
+              </div>
+
+          </div>
+          </div>
+          </div>
+          </div>
+          <input type="hidden" class="hide" name="token" id="token" value="a465a2791ae0bae853cf4bf485dbe1b6">
+          </form>
+          </div>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- nav bar ends -->
+
+  <!-- header begins -->
+
+  <div class="container-fluid" id="jcont">
+    <div class="jumbotron">
+      <h1 id="welcome">Welcome to Project (anti)Mayhem</h1>
       <div class="container-fluid" id="picBox">
         <img class="header" src="https://channel45news.com/wp-content/uploads/2017/06/2lsbfbk.jpg">
         <img class="header" src="https://images-na.ssl-images-amazon.com/images/I/51jPKxEq7aL.jpg">
         <img class="header" src="https://murderpedia.org/male.T/images/timmendequas_jesse/timmendeq000.jpg">
-        <img class="header"
-          src="https://cdn.cnn.com/cnnnext/dam/assets/150325083957-dnt-adam-lanza-house-demolished-00001709-exlarge-169.jpg">
+        <img class="header" src="assets/images/r-kelly-mugshot.jpg">
+        <div class="overlay">
+          <div class="text">Even when you're not, they are always watching...</div>
+
+
+        </div>
+        <h3 id="creeper">Informing you of the creepers in your area!</h3>
       </div>
-      <h3>Informing you of the creepers in your area!</h3>
     </div>
   </div>
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <div id="map">
-          <h2>Random Crime Facts</h2>
-          <ul>
-            <li>One in three children will be diddled by their uncle in a game closet in alabama. </li>
-            <li>1 of 8 people have commited sexual assault (look around you)</li>
-            <li>1 in 60 people is currently on parole for a violent offense (look around you)</li>
-            <li>these facts were completely unfabricated by the author </li>
-          </ul>
+
+  <!-- header ends -->
+
+  <!-- first content box begins -->
+  <div class="container-fluid" id="mainDiv">
+
+    <!-- page instructions begin -->
+    <div class="row" id="instructRow">
+      <div class="col-12">
+        <div class="text-box">
+          <h1 id="intro">Welcome to Project (anti)Mayhem</h1>
+          <p>
+            Lorem get down get down dolizzle sit tellivizzle, consectetizzle adipiscing brizzle. Nullam fizzle velizzle,
+            ma nizzle volutpizzle, mah nizzle tellivizzle, cool fo shizzle mah nizzle fo rizzle, mah home g-dizzle, mah
+            nizzle. Pellentesque owned tortizzle. Sizzle erizzle. Mammasay mammasa mamma oo sa izzle dolor dapibus
+            turpis
+            uhuh ... yih! shut the shizzle up. Maurizzle pellentesque nibh et turpizzle. Stuff in pizzle. Pellentesque
+            dang rhoncizzle shizzlin dizzle. In hizzle my shizz platea dictumst. Fizzle dapibizzle. Curabitizzle mofo
+            for
+            sure, pretizzle black, mattizzle ass, dawg vitae, nunc. Crunk suscipizzle. Integer yo fo shizzle sizzle
+            pizzle.
+          </p>
         </div>
       </div>
-      <div class="col-6">
-        <h2>Map will be here</h2>
-        <image id="mapTile" src="https://developers.planet.com/tutorials/images/quad.png"></image>
+    </div>
+    <!-- instruction box ends -->
 
-      </div>
-      <!-- <div class="col"> -->
-          <div class="col-xs-8 col-xs-offset-2">
-              <div class="input-group">
-                      <div class="input-group-btn search-panel">
-                          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            <span id="search_concept">Filter by</span> <span class="caret"></span>
-                          </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#contains">Contains</a></li>
-                            <li><a href="#its_equal">It's equal</a></li>
-                            <li><a href="#greather_than">Greather than ></a></li>
-                            <li><a href="#less_than">Less than </a></li>
-                            <li class="divider"></li>
-                            <li><a href="#all">Anything</a></li>
-                          </ul>
-                      </div>
-                      <input type="hidden" name="search_param" value="all" id="search_param">         
-                      <input type="text" class="form-control" name="x" placeholder="Search term...">
-                      <span class="input-group-btn">
-                          <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                      </span>
-                  </div>
-              <!-- </div> -->
-        <!-- <h2>search bar will be here></h2> -->
-        <!-- <form class="form-inline ">
-          <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search">
-          <i class="fas fa-search" aria-hidden="true"></i>
-        </form> -->
+    <!-- search box begins -->
+
+    <div class="row" id="searchRow">
+      <div class="col-md-12" id="searchCol">
+        <!-- Text input to test searching -->
+        <input id="input" placeholder="creeper search" type="text">
+        <button id="searchBut" class="active hover" id="submit">Submit</button>
       </div>
     </div>
+
+    <!-- search box ends -->
+
+  </div>
+  <!--first content box ends  -->
+
+
+  <!-- second content box begins -->
+  <div class="container-fluid" id="mapCont">
+
+    <!-- map box begins -->
     <div class="row">
-      <div class="col-12">
-        <h2>results will be here</h2>
-        <p>
-          Lorem get down get down dolizzle sit tellivizzle, consectetizzle adipiscing brizzle. Nullam fizzle velizzle,
-          ma nizzle volutpizzle, mah nizzle tellivizzle, cool fo shizzle mah nizzle fo rizzle, mah home g-dizzle, mah
-          nizzle. Pellentesque owned tortizzle. Sizzle erizzle. Mammasay mammasa mamma oo sa izzle dolor dapibus turpis
-          uhuh ... yih! shut the shizzle up. Maurizzle pellentesque nibh et turpizzle. Stuff in pizzle. Pellentesque
-          dang rhoncizzle shizzlin dizzle. In hizzle my shizz platea dictumst. Fizzle dapibizzle. Curabitizzle mofo for
-          sure, pretizzle black, mattizzle ass, dawg vitae, nunc. Crunk suscipizzle. Integer yo fo shizzle sizzle
-          pizzle.
-        </p>
+      <div class="col-md-12">
+
+        <h2 id="crimeMap">Crime Map</h2>
+        <div id='geocoder' class='geocoder'></div>
+
+        <!-- <div id="pageContainer"> -->
+        <!-- Map -->
+        <div id='map' style='width: 1480x; height: 500px;'></div>
+
+        <!--  map box java code starts -->
+        <script src='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js'></script>
+        <link href='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css' rel='stylesheet' />
       </div>
     </div>
+
+    <!-- map box ends -->
+
+    <!-- fact box begins -->
+    <div id="facts">
+      <h2 id="know">Knowledge is Power</h2>
+      <span id="factHead">Random Crime Facts to Make you Uneasy</span>
+      <ul>
+        <li class="facts" id="firstFact"></li>
+        <li class="facts" id="secondFact"></li>
+        <li class="facts" id="thirdFact"></li>
+        <li class="facts" id="fourthFact"></li>
+      </ul>
+    </div>
+    <!-- fact box ends -->
+
+  </div>
+  <!-- second content box ends -->
+
+  <!-- footer begins -->
+
+  <div id="footer">
+    The facts in this presentation may not be reflective of reality.
+    &copy; 2019 Project (anti)Mayhem, USA.
+    Built with a sick sense of humor.
+    All rights reserved.
+
   </div>
 
+  <!-- footer ends -->
 
 
 
@@ -110,17 +253,35 @@
 
 
 
-  <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS, then linked js -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
+
+  <!-- jquery for sleek nav bar -->
+  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+  <!-- jquery for inital styling -->
+
+  <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> -->
+
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+
+  <!-- bootstrap for sleek navbar -->
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+
+  <!--bootstrap js for initial styling  -->
+
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script> -->
+
+  <!-- linked js file -->
   <script src="assets/crime.js"></script>
 </body>
 
